@@ -28,8 +28,9 @@ def hello():
                 if x.get('message'):
                     recipient_id = x['sender']['id']
                     if x['message'].get('text'):
-                        message = x['message']['text']
-                        message = (parseStock('AAPL'))['name']
+                        stocksymbol = x['message']['text']
+                        stockinfo = parseStock(stocksymbol)
+                        message = stockinfo['name'] + " " str(stockinfo['price']) + " " + str(stockinfo['pricechange']) + " (" + str(stockinfo['percentchange']) + "%)"
                         bot.send_text_message(recipient_id, message)
                     if x['message'].get('attachments'):
                         for att in x['message'].get('attachments'):
