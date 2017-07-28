@@ -10,7 +10,7 @@ def parseStock(ticker):
     tickerVals['price'] = round(float(getQuotes(ticker)[0]['LastTradePrice']), 2)
     tickerVals['pricechange'] = round((tickerVals['price'] - opening), 2)
     tickerVals['percentchange'] = round((tickerVals['pricechange'] / opening), 2)
-    print( tickerVals)
+    return tickerVals
 
 
 
