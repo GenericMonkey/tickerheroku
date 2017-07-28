@@ -4,11 +4,11 @@ in any messages that the bot receives and echos it back.
 """
 from flask import Flask, request
 from pymessenger.bot import Bot
-
+from stockparser import parseStock
 app = Flask(__name__)
 
 ACCESS_TOKEN = "EAAESyTSZAuIwBAO94G27EtXBit7WJZC0v6AzpxVjrZCoXvZCTsqaMUmMwBk4puIKY4vjRk8UCjl9cuGxky77nMmxgphoKWZBrkUdnZCWOJaBamMZAZAW8mZAbSer1u8pbUi031ZCt5FwLzu2CBhnzm07SDqFuioo4SIrDaPWaDnMLYYgZDZD"
-VERIFY_TOKEN = ""
+VERIFY_TOKEN = "tickersarecool"
 bot = Bot(ACCESS_TOKEN)
 
 
@@ -29,6 +29,7 @@ def hello():
                     recipient_id = x['sender']['id']
                     if x['message'].get('text'):
                         message = x['message']['text']
+                        message = (parseStock('AAPL'))['name']
                         bot.send_text_message(recipient_id, message)
                     if x['message'].get('attachments'):
                         for att in x['message'].get('attachments'):
