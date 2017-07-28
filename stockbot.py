@@ -30,7 +30,7 @@ def hello():
                     if x['message'].get('text'):
                         stocksymbol = x['message']['text']
                         stockinfo = parseStock(stocksymbol)
-                        message = stockinfo['name'] + " " str(stockinfo['price']) + " " + str(stockinfo['pricechange']) + " (" + str(stockinfo['percentchange']) + "%)"
+                        message = stockinfo['name'] + " " + str(stockinfo['price']) + " " + str(stockinfo['pricechange']) + " (" + str(stockinfo['percentchange']) + "%)"
                         bot.send_text_message(recipient_id, message)
                     if x['message'].get('attachments'):
                         for att in x['message'].get('attachments'):
