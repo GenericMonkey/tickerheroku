@@ -35,14 +35,14 @@ def hello():
                                 bot.send_text_message(recipient_id, helpmessage)
                             else:
                                 stockinfo = parseStock(stocksymbol)
-                                elements = []
-                                titlemessage = stockinfo['name'] + " " + str(stockinfo['price'])
-                                submessage = str(stockinfo['pricechange']) + " (" + str(stockinfo['percentchange']) + "%)"
-                                element = Element(title=titlemessage, subtitle=submessage)
-                                elements.append(element)
-                                bot.send_generic_message(recipient_id, elements)
-                            # message = stockinfo['name'] + " " + str(stockinfo['price']) + " " + str(stockinfo['pricechange']) + " (" + str(stockinfo['percentchange']) + "%)"
-                            # bot.send_text_message(recipient_id, message)
+                                # elements = []
+                                # titlemessage = stockinfo['name'] + " " + str(stockinfo['price'])
+                                # submessage = str(stockinfo['pricechange']) + " (" + str(stockinfo['percentchange']) + "%)"
+                                # element = Element(title=titlemessage, subtitle=submessage)
+                                # elements.append(element)
+                                # bot.send_generic_message(recipient_id, elements)
+                                message = stockinfo['name'] + " " + str(stockinfo['price']) + " " + str(stockinfo['pricechange']) + " (" + str(stockinfo['percentchange']) + "%)"
+                                bot.send_text_message(recipient_id, message)
                         if x['message'].get('attachments'):
                             for att in x['message'].get('attachments'):
                                 bot.send_attachment_url(recipient_id, att['type'], att['payload']['url'])
