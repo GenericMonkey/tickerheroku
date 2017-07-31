@@ -38,8 +38,8 @@ def hello():
                                 bot.send_attachment_url(recipient_id, att['type'], att['payload']['url'])
                     else:
                         pass
-            except:
-                return "Foreign Post Type"
+        except:
+            return "Foreign Post Type"
         return "Success"
 
 
