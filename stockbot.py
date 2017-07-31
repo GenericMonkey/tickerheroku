@@ -21,22 +21,25 @@ def hello():
             return 'Invalid verification token'
 
     if request.method == 'POST':
-        output = request.get_json()
-        for event in output['entry']:
-            messaging = event['messaging']
-            for x in messaging:
-                if x.get('message'):
-                    recipient_id = x['sender']['id']
-                    if x['message'].get('text'):
-                        stocksymbol = x['message']['text']
-                        stockinfo = parseStock(stocksymbol)
-                        message = stockinfo['name'] + " " + str(stockinfo['price']) + " " + str(stockinfo['pricechange']) + " (" + str(stockinfo['percentchange']) + "%)"
-                        bot.send_text_message(recipient_id, message)
-                    if x['message'].get('attachments'):
-                        for att in x['message'].get('attachments'):
-                            bot.send_attachment_url(recipient_id, att['type'], att['payload']['url'])
-                else:
-                    pass
+        try:
+            output = request.get_json()
+            for event in output['entry']:
+                messaging = event['messaging']
+                for x in messaging:
+                    if x.get('message'):
+                        recipient_id = x['sender']['id']
+                        if x['message'].get('text'):
+                            stocksymbol = x['message']['text']
+                            stockinfo = parseStock(stocksymbol)
+                            message = stockinfo['name'] + " " + str(stockinfo['price']) + " " + str(stockinfo['pricechange']) + " (" + str(stockinfo['percentchange']) + "%)"
+                            bot.send_text_message(recipient_id, message)
+                        if x['message'].get('attachments'):
+                            for att in x['message'].get('attachments'):
+                                bot.send_attachment_url(recipient_id, att['type'], att['payload']['url'])
+                    else:
+                        pass
+            except:
+                return "Foreign Post Type"
         return "Success"
 
 
