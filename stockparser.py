@@ -11,7 +11,7 @@ def parseStock(ticker):
         tickerVals['name'] = current['StockSymbol']
         tickerVals['price'] = round(float(current['LastTradePrice']), 2)
         tickerVals['pricechange'] = round((tickerVals['price'] - opening), 2)
-        tickerVals['percentchange'] = round((tickerVals['pricechange'] / opening), 2)
+        tickerVals['percentchange'] = round(((tickerVals['pricechange'] / opening) * 100), 2)
         return tickerVals
     except:
         tickerVals = {}
