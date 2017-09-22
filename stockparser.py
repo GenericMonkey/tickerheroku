@@ -1,4 +1,3 @@
-from googlefinance import getQuotes
 from yahoo_finance import Share
 
 
@@ -6,10 +5,10 @@ def parseStock(ticker):
     try:
         stock = Share(ticker)
         opening = float(stock.get_open())
-        current = getQuotes(ticker)[0]
+        current = float(stock.get_price())
         tickerVals = {}
-        tickerVals['name'] = current['StockSymbol']
-        tickerVals['price'] = round(float(current['LastTradePrice']), 2)
+        tickerVals['name'] = stock.get_name()
+        tickerVals['price'] = round(current, 2)
         tickerVals['pricechange'] = round((tickerVals['price'] - opening), 2)
         tickerVals['percentchange'] = round(((tickerVals['pricechange'] / opening) * 100), 2)
         return tickerVals
